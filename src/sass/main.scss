@@ -1,0 +1,903 @@
+@use './mixins' as *;
+@use 'colors.scss' as *;
+@use 'small.scss' as *;
+@use 'medium.scss' as *;
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+	font-optical-sizing: auto;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+textarea {
+	resize: vertical;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.wrapper {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+
+//nawigacja
+.nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	padding: 0.5em 1em;
+	height: 75px;
+	width: 100%;
+	font-size: 1.6em;
+	overflow: hidden;
+	z-index: 1000;
+	background-color: #fff;
+	&__link {
+		text-decoration: none;
+		color: #000;
+		&:hover {
+			color: white;
+		}
+	}
+	&__burger-icon {
+		margin-top: 0.8em;
+		padding: 0.5rem 2em;
+		font-size: 2.4rem;
+		z-index: 100;
+		cursor: pointer;
+	}
+	&__logo {
+		padding-top: 0.7em;
+		letter-spacing: 0.1em;
+		z-index: 11000;
+		color: #000;
+		:hover {
+			cursor: pointer;
+		}
+		&--link {
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 600;
+			color: #000;
+		}
+	}
+
+	&__panel--desktop {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: -0.6em;
+		margin-bottom: -1em;
+		margin-right: 4em;
+		height: 80px;
+		max-width: 1000px;
+		display: none;
+		transition: right 0.5s;
+		transition: right 0.5s;
+	}
+
+	&__link--desktop {
+		position: relative;
+		margin: 0 0.5em;
+		top: 30px;
+		height: 80px;
+		width: 100px;
+		text-align: center;
+		font-weight: 450;
+		text-decoration: none;
+		z-index: 0;
+		font-size: 2rem;
+		color: $black;
+		background-color: #fff;
+		transition: color 0.3s, background-color 0.3s;
+		&:hover {
+			color: $white;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 0;
+			z-index: -1;
+			width: 100%;
+			color: $white;
+			background-color: $black;
+			transition: height 0.3s;
+		}
+		&:hover::after {
+			height: 150%;
+			color: $white;
+		}
+		&:last-child {
+			margin-right: 8em;
+		}
+	}
+
+	&__panel--mobile {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: fixed;
+		top: 75px;
+		right: -100%;
+		width: 60%;
+		height: 100%;
+		background-color: #fff;
+		overflow: hidden;
+		transition: right 0.5s ease;
+		z-index: 1000;
+	}
+	&__link--mobile {
+		margin-top: 1em;
+		margin-bottom: 2em;
+		margin-left: 2em;
+		width: 7rem;
+		font-size: 2rem;
+		z-index: 100;
+		background-color: $white;
+		color: #000;
+		&::after {
+			content: '';
+			display: block;
+			margin: 0 auto;
+			width: 50%;
+			height: 1px;
+			background-color: $black;
+			opacity: 0;
+			transition: opacity 0.5s;
+		}
+		&:hover::after {
+			opacity: 1;
+		}
+	}
+	.shown {
+		right: 0;
+	}
+}
+
+//header
+.header {
+	position: relative;
+	width: 100%;
+	height: 300px;
+	background-image: url(/dist/img/jungle-small.min.jpg);
+	background-position: 50% 70%;
+	font-size: 1.6rem;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.62);
+	}
+	&__p {
+		position: absolute;
+		margin-top: 8em;
+		margin-left: 2.5em;
+		padding-bottom: 5.5em;
+		z-index: 10;
+		font-weight: 300;
+		color: white;
+	}
+	&__h2 {
+		position: absolute;
+		margin-left: 2.5em;
+		margin-top: 9.5em;
+		z-index: 10;
+		font-size: 1.6rem;
+		font-weight: 500;
+		color: white;
+	}
+}
+//aboutus
+.aboutus {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: space-between;
+	height: 400px;
+
+	&__heading {
+		margin-top: 1.5em;
+		margin-bottom: 0.5em;
+		align-items: center;
+		text-transform: uppercase;
+		font-weight: 400;
+		font-size: 2rem;
+	}
+	.bottom {
+		height: 200px;
+		&__img {
+			img {
+				margin-bottom: 1em;
+				width: 100%;
+				height: 100px;
+				background-size: cover;
+			}
+		}
+		&__text {
+			&-p {
+				margin-top: 0.5em;
+				margin-bottom: -7em;
+				font-size: 1.4rem;
+			}
+			&-h3 {
+				font-size: 1.6rem;
+				align-items: center;
+			}
+		}
+	}
+}
+//adventure
+.adventure {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	height: 200px;
+	background-image: url(/dist/img/girl-Small.min.jpg);
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: 50% 50%;
+	color: #fff;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		background-color: rgba(0, 0, 0, 0.62);
+	}
+
+	h1 {
+		position: relative;
+		padding: 1em 0.3em;
+		border: 1px solid white;
+		font-size: 2.8rem;
+		font-weight: 500;
+		z-index: 1;
+	}
+}
+//oferta
+.offer {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: -2em;
+	width: 100%;
+	height: 1000px;
+
+	&__heading {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 2em;
+		width: 100%;
+		height: 100px;
+		text-align: center;
+
+		&-title {
+			margin: 0.5em;
+			font-size: 2.8rem;
+			font-weight: 500;
+		}
+
+		&-description {
+			font-size: 2rem;
+			margin-bottom: 1em;
+		}
+	}
+
+	.cards {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		&__card:hover {
+			transform: scale(1.2);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+		}
+		&__card {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding-top: 1em;
+			margin: 1em;
+			margin-bottom: 1.5em;
+			margin-left: 2em;
+			margin-right: 1em;
+			height: 230px;
+			border-radius: 5px;
+			background-color: #fff;
+			width: 200px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+			transition: transform 0.2s;
+
+			&--title {
+				margin-top: -2em;
+				text-align: center;
+				font-size: 1.8rem;
+				font-weight: 450;
+			}
+			&--price {
+				margin-top: 0.3em;
+				font-size: 3rem;
+				font-weight: 500;
+			}
+			&--price::after {
+				content: '0';
+				position: relative;
+				top: 0.2em;
+				display: inline;
+			}
+			&--disabled {
+				opacity: 0.5;
+				.fa-minus {
+					color: red;
+					opacity: 1;
+					z-index: 10;
+				}
+			}
+
+			&--features {
+				margin: 1em;
+				list-style-type: none;
+				.fa-check {
+					color: lime;
+				}
+
+				&:last-child {
+					padding-bottom: 1em;
+				}
+			}
+			&--feature {
+				margin-top: 0.4em;
+			}
+		}
+		&__card-button {
+			margin-bottom: -3em;
+			height: 25px;
+			width: 60%;
+			border-radius: 5px;
+			transition: 0.2s;
+			background-color: #77dd77;
+			&:hover {
+				background-color: rgb(39, 214, 39);
+			}
+		}
+		&__more-offers {
+			position: relative;
+			margin: 1em;
+			margin-bottom: -6em;
+			width: 60%;
+			height: 30px;
+			border-radius: 10px;
+			z-index: 1;
+			overflow: hidden;
+			background-color: #77dd77;
+			&--text {
+				position: relative;
+				z-index: 3;
+			}
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+				border-radius: 10px;
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.3s;
+				background-color: rgb(39, 214, 39);
+			}
+			&:hover::before {
+				transform: scaleX(1);
+				z-index: 2;
+				color: #fff;
+			}
+		}
+	}
+}
+
+.footer {
+	padding: 1.5em;
+	min-height: 22em;
+	text-decoration: none;
+	list-style: none;
+	background-color: #f9f9f9;
+	border-top: 0.0625em solid #e5e5e5;
+
+	.footer__container {
+		display: flex;
+		flex-direction: column;
+		align-content: flex-start;
+		text-align: left; // Ustawienie wyrównania do lewej
+		align-items: flex-start;
+		width: 100%; // Zapewnia, że kontener zajmie całą szerokość
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.5em;
+
+		&-icon {
+			font-size: 1.5em;
+			margin-right: 0.5em;
+		}
+
+		&-text {
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+	}
+
+	.footer__menu {
+		display: flex;
+		flex-direction: column;
+		align-content: flex-start;
+		width: 100%;
+
+		.footer__column {
+			margin-bottom: 1em;
+
+			:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.footer__title {
+			margin-bottom: 0.75em;
+			font-size: 1em;
+			font-weight: bold;
+		}
+
+		.footer__list {
+			padding: 0;
+			list-style: none;
+		}
+
+		.footer__item {
+			margin-bottom: 0.375em;
+		}
+
+		.footer__link {
+			text-decoration: none;
+			color: #333;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.footer__bottom {
+		margin-top: 1.5em;
+		border-top: 0.0625em solid #e5e5e5;
+		padding-top: 0.75em;
+	}
+
+	.footer__copyright {
+		margin: 1em;
+		text-align: center;
+		font-size: 0.875em;
+		color: #666;
+	}
+}
+//breakpointy
+@media (min-width: 796px) {
+	.nav {
+		&__burger-icon {
+			margin-top: 0.4em;
+			padding: 0.5rem 3em;
+			font-size: 2.8rem;
+			cursor: pointer;
+			z-index: 100;
+		}
+		&__link--mobile {
+			width: 100px;
+			font-size: 2.4rem;
+		}
+	}
+	.header {
+		height: 400px;
+		background-image: url(/dist/img/jungle-Big.min.jpg);
+		background-size: cover;
+		background-position: 50% 60%;
+		&__p {
+			margin-top: 9em;
+			margin-top: 9em;
+			margin-left: 8em;
+			font-size: 2.2rem;
+		}
+		&__h2 {
+			margin-left: 6.5em;
+			font-size: 2.7rem;
+		}
+	}
+	.aboutus {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		&__heading {
+			margin-top: -1em;
+			align-self: center;
+			font-size: 2.2rem;
+		}
+		.bottom {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			height: 200px;
+			background-size: cover;
+			object-fit: cover;
+			&__img {
+				img {
+					margin: 1em 5em;
+					height: 200px;
+					width: 300px;
+					content: url('/dist/img/waters-Big.min.jpg');
+				}
+			}
+			&__text {
+				margin-top: 3em;
+				&-h3 {
+					color: #000;
+				}
+				&-p {
+					color: #000;
+				}
+			}
+		}
+	}
+	.offer {
+		height: 900px;
+
+		.cards {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex-wrap: wrap;
+			height: 500px;
+			flex-direction: row;
+			align-content: space-around;
+			align-items: stretch;
+
+			&__card {
+				flex-basis: 40%;
+				flex-grow: 0;
+				height: 290px;
+				font-size: 1.6rem;
+				&:nth-child(1) {
+					height: 320px;
+
+					flex-basis: 60%;
+					font-size: 1.6rem;
+				}
+			}
+			&__more-offers {
+				margin-top: 1em;
+				margin-bottom: -2em;
+			}
+		}
+	}
+	.footer {
+		display: flex;
+		flex-direction: row;
+		padding: 0;
+		width: 100%;
+		height: 250px;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		.footer__container {
+			justify-content: space-between;
+			align-items: stretch;
+			width: 100%;
+			flex-wrap: wrap;
+			height: 60%;
+			.footer__logo {
+				justify-content: flex-end;
+				padding-right: 4.5em;
+				width: 50%;
+				height: 70%;
+				margin: 0.5em 0;
+				margin-bottom: 3em;
+				font-size: 3.6rem;
+				.footer__logo-text {
+					font-weight: 400;
+				}
+			}
+			.footer__menu {
+				flex-direction: row;
+				justify-content: start;
+				width: 50%;
+				height: 80%;
+				font-size: 1.2rem;
+				.footer__column {
+					margin: 0.5em 3em;
+					.footer__title {
+						font-size: 2rem;
+					}
+					.footer__list {
+						.footer__item {
+							margin: 1em 0;
+						}
+					}
+				}
+			}
+		}
+		.footer__bottom {
+			border-top: 1px solid black;
+			width: 100%;
+			.footer__copyright {
+				text-align: center;
+				font-size: 1.6rem;
+			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.nav {
+		&__logo {
+			padding-top: 0.4em;
+			font-size: 3.2rem;
+		}
+		&__panel--desktop {
+			display: flex;
+		}
+		&__link--desktop {
+			font-size: 2.3rem;
+		}
+
+		&__btn--desktop {
+			display: block;
+		}
+
+		&__burger-icon {
+			display: none;
+		}
+		&__panel--mobile {
+			display: none;
+		}
+		&__three {
+			margin-left: 2em;
+		}
+		&__logo {
+			margin-left: 10em;
+		}
+	}
+	.header {
+		height: 450px;
+		background-image: url(/dist/img/jungle-Big.min.jpg);
+		background-size: cover;
+		background-position: 50% 60%;
+		&__p {
+			margin-top: 7.5em;
+			margin-left: 9em;
+			font-size: 3rem;
+		}
+		&__h2 {
+			margin-left: 6.7em;
+			margin-top: 6.5em;
+			font-size: 4rem;
+		}
+	}
+
+	.adventure {
+		height: 300px;
+		background-image: url(/dist/img/girl-Big.min.jpg);
+		h1 {
+			padding: 1em 5em;
+			font-size: 3.5rem;
+		}
+	}
+	.offer {
+		height: 700px;
+		&__heading {
+			&-title {
+				margin-top: 1em;
+				margin: 0.5em;
+				font-size: 3.2rem;
+				font-weight: 500;
+			}
+
+			&-description {
+				font-size: 2.5rem;
+			}
+		}
+		.cards {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			margin-top: 3em;
+			&__card {
+				flex-basis: 25%;
+				flex-grow: 0;
+				height: 400px;
+				font-size: 1.8rem;
+				&:nth-child(1) {
+					height: 400px;
+					flex-basis: 25%;
+					font-size: 1.8rem;
+				}
+				&--title {
+					margin-top: -4em;
+					text-align: center;
+					font-size: 2.2rem;
+					font-weight: 450;
+				}
+				&--feature {
+					margin-bottom: 1em;
+				}
+			}
+			&__more-offers {
+				margin-bottom: -1em;
+			}
+			.cards__card-button {
+				height: 35px;
+				font-size: 1.6rem;
+			}
+		}
+	}
+	.aboutus {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: -4em;
+		align-content: center;
+		height: 500px;
+		&__heading {
+			flex-direction: row;
+			align-self: auto;
+			margin-top: -1.5em;
+			font-size: 3.2rem;
+			margin-bottom: 2em;
+		}
+
+		.bottom {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			&__img {
+				img {
+					position: relative;
+					top: -30px;
+					left: -100px;
+					margin-right: -2em;
+					margin-left: 2em;
+					width: 500px;
+					height: 300px;
+					background-size: cover;
+					
+				}
+			}
+			&__text {
+				margin-top: -0.5em;
+				margin-left: -1em;
+				&-p {
+					margin-top: 0.5em;
+					margin-bottom: -7em;
+					margin-left: -1em;
+					font-size: 1.8rem;
+				}
+				&-h3 {
+					font-size: 2.2rem;
+					align-items: center;
+				}
+			}
+		}
+	}
+	.footer {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+		width: 100%;
+		height: 250px;
+		.footer__container {
+			justify-content: space-between;
+			align-items: stretch;
+			width: 100%;
+			flex-wrap: wrap;
+			height: 60%;
+			.footer__logo {
+				justify-content: flex-end;
+				padding-right: 4.5em;
+				margin: 0.5em 0;
+				margin-bottom: 3em;
+				width: 50%;
+				height: 70%;
+				font-size: 3.6rem;
+				.footer__logo-text {
+					font-weight: 400;
+				}
+			}
+			.footer__menu {
+				flex-direction: row;
+				justify-content: start;
+				width: 50%;
+				height: 80%;
+				font-size: 1.2rem;
+				.footer__column {
+					margin: 0.5em 3em;
+					.footer__title {
+						font-size: 2rem;
+					}
+					.footer__list {
+						.footer__item {
+							margin: 1em 0;
+						}
+					}
+				}
+			}
+		}
+		.footer__bottom {
+			border-top: 1px solid black;
+			width: 100%;
+			.footer__copyright {
+				text-align: center;
+				font-size: 1.6rem;
+			}
+		}
+	}
+}

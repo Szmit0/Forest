@@ -1,0 +1,41 @@
+@use './mixins' as *;
+@use 'colors.scss' as *;
+@media (min-width: 992px) {
+	.nav {
+		&__panel--desktop {
+			display: flex;
+			justify-content: space-between;
+			height: 20px;
+			width: 600px;
+			position: absolute;
+			right: 150px;
+		}
+		.nav__btn--desktop {
+			display: block;
+			height: 20px;
+			width: 70px;
+			margin: 0.5em 2em;
+			background-color: $white;
+				&--desktophome1 {
+					@include hover-transition($black); /* używamy mixinu */
+				}
+				&--desktophome2 {
+					@include hover-transition($black); /* używamy mixinu */
+				}
+				&--desktophome3 {
+					@include hover-transition($black); /* używamy mixinu */
+				}
+				&--desktophome4 {
+					@include hover-transition($black); /* używamy mixinu */
+			}
+		}
+
+		&__nav--mobile {
+			display: none;
+		}
+
+		&__icon {
+			display: none;
+		}
+	}
+}
